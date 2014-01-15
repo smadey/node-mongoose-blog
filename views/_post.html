@@ -1,0 +1,51 @@
+<div class="postItem">
+<% if(typeof isPostList == 'undefined') { %>
+    <div>
+        <h2><%= post.title %></h2>
+
+    <% if(user) { %>
+        <% if(user.name == post.creator) { %>
+        <div>
+            <a href="/edit/<%= post.creator %>/<%= post._id %>" class="btn btn-default">Update</a>
+            <a href="/remove/<%= post.creator %>/<%= post._id %>" class="btn btn-default">Delete</a>
+        </div>
+        <% } else { %>
+            <% var flag = 1 %>
+            <% post.reprint.from && post.reprint.from.creator == user.name && (flag = 0) %>
+            <% post.reprint.to && post.reprint.to.forEach(function(item, index) { %>
+                <% item.creator == user.name && (flag = 0) %>
+            <% }) %>
+            <% if(flag) { %>
+            <div>
+                <a href="/reprint/<%= post.creator %>/<%= post._id %>" class="btn btn-default">Reprint</a>
+            </div>
+            <% } %>
+        <% } %>
+    <% } %>
+
+<% } else { %>
+    <a href="/u/<%= post.creator %>" class="avatar"><img src="<%= post.avatar || '/images/avatar.jpg' %>" /></a>
+
+    <div>
+        <h2><a href="/u/<%= post.creator %>/<%= post._id %>"><%= post.title %></a></h2>
+<% } %>
+
+        <div>
+            <small class="text-muted">
+                作者：<a href="/u/<%= post.creator %>"><%= post.creator %></a> |
+                日期：<%= post.lastUpdateTime %> |
+                标签：<% var tags = post.tags %> <%- include _tags.html %>
+            </small>
+            <div class="postItem_content">
+                <%- post.content %>
+            </div>
+            <small class="text-muted">
+                阅读：<%= post.pv.length %> | 评论：<%= post.comments.length %> | 转载：<%= post.reprint.to && post.reprint.to.length || 0 %>
+            </small>
+        <% if (post.reprint.from) { %>
+            <br><a class="postItem_parentLink" href="/u/<%= post.reprint.from.creator %>/<%= post.reprint.from.id %>">原文链接</a>
+        <% } %>
+        </div>
+
+    </div>
+</div>

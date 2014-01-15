@@ -1,0 +1,49 @@
+body {
+    padding-top: 80px;
+}
+
+input.form-control {
+    max-width: 250px;
+}
+.tagsContainer input.form-control {
+    min-width: 60px;
+}
+
+.tag,
+.tags code {
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px 5px 5px 0;
+}
+.tag:hover {
+    text-decoration: none;
+}
+
+.avatar {
+    box-shadow: 0px 1px 4px #888;
+    float: left;
+    height: 32px;
+    margin-right: 10px;
+    width: 32px;
+}
+.avatar img {
+    height: 100%;
+    width: 100%;
+}
+.avatar + div {
+    overflow: hidden;
+}
+.postItem .avatar {
+    margin-top: 25px;
+}
+.commentItem .avatar {
+    margin-top: 5px;
+}
+
+.postList .postItem_content,
+.postList .postItem_parentLink {
+    display: none;
+}
+.postList small {
+    display: block;
+}

@@ -1,0 +1,15 @@
+<br />
+<div>
+    <% if(pageIndex > 1) { %>
+        <span class="prevPage">
+            <a href="?p=<%= pageIndex - 1 %>&s=<%= pageSize %>">上一页</a>
+        </span>
+    <% } %>
+
+    <% if(pageIndex * pageSize < totalCount) { %>
+        <span class="nextPage">
+            <a href="?p=<%= pageIndex + 1 %>&s=<%= pageSize %>">下一页</a>
+        </span>
+    <% } %>
+
+</div>

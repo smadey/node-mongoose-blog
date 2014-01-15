@@ -1,0 +1,36 @@
+<form method="post" role="form">
+    <% var isNew = typeof post == 'undefined' %>
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" name="title" class="form-control" value="<%= isNew ? '' : post.title %>">
+    </div>
+
+    <div class="form-group">
+        <label for="title">Tags:</label>
+        <div class="row tagsContainer">
+            <div class="col-xs-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default js-addTag" type="button">Add</button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-10 tags">
+                <% isNew || post.tags.forEach(function(tag, index) { %>
+                    <% if(tag) { %>
+                        <code><%= tag %><input type="hidden" name="tags" value="<%= tag %>"></code>
+                    <% } %>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="content">Content:</label>
+        <textarea name="content" class="form-control" rows="5"><%= isNew ? '' : post.content %></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-default" value="Save" />
+</form>

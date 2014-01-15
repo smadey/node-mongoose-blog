@@ -1,0 +1,67 @@
+<br /><br />
+<% post.comments.forEach(function(comment, index) { %>
+<div class="commentItem">
+    <a href="/u/<%= comment.creator %>" class="avatar"><img src="<%= comment.avatar || '/images/avatar.jpg' %>" /></a>
+    <div>
+        <small class="text-muted">
+            <a href="<%= comment.website %>"><%= comment.creator %></a>
+            <span class="info"> 回复于 <%= comment.time %></span>
+        </small>
+        <p><%- comment.content %></p>
+    </div>
+</div>
+<% }) %>
+
+<br />
+
+<form role="form" method="post" class="form-horizontal">
+    <% if (user) { %>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Username:</label>
+            <div class="col-sm-11">
+                <input type="text" name="creator" class="form-control" value="<%= user.name %>" placeholder="Username" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Email:</label>
+            <div class="col-sm-11">
+                <input type="email" name="email" class="form-control" value="<%= user.email %>" placeholder="Email" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Website:</label>
+            <div class="col-sm-11">
+                <input type="text" name="website" class="form-control" value="/u/<%= user.name %>" placeholder="Website" readonly>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Username:</label>
+            <div class="col-sm-11">
+                <input type="text" name="creator" class="form-control" placeholder="Username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Email:</label>
+            <div class="col-sm-11">
+                <input type="email" name="email" class="form-control" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Website:</label>
+            <div class="col-sm-11">
+                <input type="text" name="website" class="form-control" value="http://" placeholder="Website like http://">
+            </div>
+        </div>
+    <% } %>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <textarea name="content" class="form-control" rows="5"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <input type="submit" value="Publish" class="btn btn-default"/>
+        </div>
+    </div>
+</form>

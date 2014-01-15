@@ -1,0 +1,13 @@
+<ul class="list-unstyled archive">
+    <% var lastYear = 0 %>
+    <% posts.forEach(function(post, index) { %>
+        <% if(lastYear != post.lastUpdateTime.substring(0, 4)) { %>
+            <% lastYear = post.lastUpdateTime.substring(0, 4) %>
+            <li><h3><%= lastYear %></h3></li>
+        <% } %>
+        <li>
+            <span class="text-muted"><%= post.lastUpdateTime.substring(0, 10) %></span>&nbsp;&nbsp;
+            <a href="/u/<%= post.creator %>/<%= post._id %>"><%= post.title %></a>
+        </li>
+    <% }) %>
+</ul>

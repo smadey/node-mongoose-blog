@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Blog</title>
+    <meta name="description" content="Smadey, Blog, Smadey Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <header class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Blog</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <nav class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="<%= title == 'home' ? 'active' : '' %>"><a title="home" href="/">Home</a></li>
+                    <li class="<%= title == 'archive' ? 'active' : '' %>"><a title="archive" href="/archive">Archive</a></li>
+                    <li class="<%= title == 'tags' ? 'active' : '' %>"><a title="tags" href="/tags">Tags</a></li>
+                    <li class="<%= title == 'links' ? 'active' : '' %>"><a title="links" href="/links">Links</a></li>
+                    <% if(locals.user) { %>
+                    <li class="<%= title == 'post' ? 'active' : '' %>"><a title="post" href="/post">Post</a></li>
+                    <li class="<%= title == 'upload' ? 'active' : '' %>"><a title="upload" href="/upload">Upload</a></li>
+                    <% } %>
+                </ul>
+                <form action="/search" method="get" class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="keyword" placeholder="Search"
+                            value="<%= typeof keyword == 'undefined' ? '' : keyword %>">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <% if(locals.user) { %>
+                    <li><a href="/u/<%= locals.user.name %>"><%= locals.user.name %></a></li>
+                    <% } %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <% if(locals.user) { %>
+                            <li><a title="logout" href="/logout">Logout</a></li>
+                            <% } else { %>
+                            <li><a title="login" href="/login">Login</a></li>
+                            <li><a title="reg" href="/reg">Register</a></li>
+                            <% } %>
+                        </ul>
+                    </li>
+                </ul>
+            </nav><!-- /.navbar-collapse -->
+        </div>
+    </header>
+
+    <div class="container">
+
+        <% if(locals.success) { %>
+            <div class="alert alert-success fade in">
+                <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+                <%= locals.success %>
+            </div>
+        <% } %>
+        <% if(locals.error) { %>
+            <div class="alert alert-warning fade in">
+                <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+                <%= locals.error %>
+            </div>
+        <% } %>
